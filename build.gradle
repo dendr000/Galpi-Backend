@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.14'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.note'
+version = '0.0.1-SNAPSHOT'
+
+// ==========================================================================
+// 자바 컴파일 및 호환성 설정 (구버전 Gradle 에러 완벽 우회 및 안전성 확보)
+// ==========================================================================
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testCompileOnly 'org.projectlombok:lombok'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    
+    // 브라우저 자동 새로고침(LiveReload) 및 서버 자동 재시작을 위한 DevTools
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// ==========================================================================
+// [개발 환경 전용] 정적 리소스(HTML/CSS/JS) 실시간 다이렉트 맵핑 설정
+// ==========================================================================
+tasks.named('bootRun') {
+    sourceResources sourceSets.main
+}
