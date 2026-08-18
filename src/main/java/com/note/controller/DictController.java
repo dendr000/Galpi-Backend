@@ -1,3 +1,4 @@
+// 파일 위치: src/main/java/com/note/controller/DictController.java
 package com.note.controller;
 
 import com.note.domain.Dict;
@@ -24,10 +25,10 @@ public class DictController {
     @PostMapping
     @Transactional
     public Dict saveDict(@RequestBody Dict dict) {
-        Dict existing = dictRepository.findByWorkIdAndWord(dict.getWorkId(), dict.getWord());
+        // ★ 단어+한자 쌍이 완전히 똑같은 찌꺼기가 들어올 때만 차단
+        Dict existing = dictRepository.findByWorkIdAndWordAndTranslation(dict.getWorkId(), dict.getWord(), dict.getTranslation());
         if (existing != null) {
-            existing.setTranslation(dict.getTranslation());
-            return dictRepository.save(existing);
+            return existing; 
         }
         return dictRepository.save(dict);
     }
@@ -36,7 +37,7 @@ public class DictController {
     @Transactional
     public void saveBulkDicts(@RequestBody List<Dict> dicts) {
         for (Dict d : dicts) {
-            Dict existing = dictRepository.findByWorkIdAndWord(d.getWorkId(), d.getWord());
+            Dict existing = dictRepository.findByWorkIdAndWordAndTranslation(d.getWorkId(), d.getWord(), d.getTranslation());
             if (existing == null) {
                 dictRepository.save(d);
             }
@@ -45,7 +46,13 @@ public class DictController {
 
     @DeleteMapping
     @Transactional
-    public void deleteDict(@RequestParam String workId, @RequestParam String word) {
-        dictRepository.deleteByWorkIdAndWord(workId, word);
+    public void deleteDict(@RequestParam String workId, @RequestParam String word, @RequestParam(required = false) String translation) {
+        if (translation != null && !translation.isEmpty()) {
+            // 특정 한자 쌍만 파괴
+            dictRepository.deleteByWorkIdAndWordAndTranslation(workId, word, translation);
+        } else {
+            // 해당 단어 전체 파괴
+            dictRepository.deleteByWorkIdAndWord(workId, word);
+        }
     }
 }

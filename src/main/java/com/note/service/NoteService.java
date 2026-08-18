@@ -64,7 +64,7 @@ public class NoteService {
     // 파라미터 앞에 @NonNull 적용
     public String delNote(@NonNull Long id) {
         log.info("[NoteService] delNote() 메서드가 호출되었습니다. 삭제 대상 ID: {}", id);
-        noteRepository.deleteById(id); // (오타 수정: noteRepository로 변경해야 함!)
+        noteRepository.deleteById(id); // (noteRepository로 변경해야 함!)
         noteRepository.deleteById(id); 
         log.info("[NoteService] delNote() 삭제 처리 완료.");
         return "delete success";
