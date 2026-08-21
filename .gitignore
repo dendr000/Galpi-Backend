@@ -1,1 +1,6 @@
 .env
+
+# Gradle / 빌드 산출물 — 매 빌드마다 바뀌는 내용이라 추적하지 않음
+.gradle/
+build/
+bin/
