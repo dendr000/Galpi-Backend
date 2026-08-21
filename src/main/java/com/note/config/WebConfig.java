@@ -20,11 +20,11 @@ public class WebConfig implements WebMvcConfigurer {
         
         // 1. 이미지 외부 경로 매핑
         registry.addResourceHandler("/img/**")
-                .addResourceLocations("file:///C:/dev/Galpi/Galpi-media/img/");
+                .addResourceLocations("file:///C:/dev/Galpi/Galpi-Media/img/");
                 
         // 2. 폰트 외부 경로 매핑
         registry.addResourceHandler("/fonts/**")
-                .addResourceLocations("file:///C:/dev/Galpi/Galpi-media/fonts/");
+                .addResourceLocations("file:///C:/dev/Galpi/Galpi-Media/fonts/");
     }
 
     @Override

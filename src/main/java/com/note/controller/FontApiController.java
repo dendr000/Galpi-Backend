@@ -19,7 +19,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 @Slf4j
 public class FontApiController {
 
-    private final String FONT_DIR = "C:/dev/Galpi/Galpi-media/fonts";
+    private final String FONT_DIR = "C:/dev/Galpi/Galpi-Media/fonts";
     private final String DICT_FILE = FONT_DIR + "/font-dict.json";
 
     @GetMapping
