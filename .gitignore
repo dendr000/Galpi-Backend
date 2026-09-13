@@ -4,3 +4,10 @@
 .gradle/
 build/
 bin/
+
+# Galpi-React의 vite build 산출물 (exe 패키징용) — static/sql/은 소스라서 별개
+src/main/resources/static/assets/
+src/main/resources/static/fonts/
+src/main/resources/static/index.html
+src/main/resources/static/favicon.svg
+src/main/resources/static/icons.svg
