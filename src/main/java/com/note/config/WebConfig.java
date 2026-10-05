@@ -39,5 +39,14 @@ public class WebConfig implements WebMvcConfigurer {
         // 시스템 구동 제어 컨텍스트: 루트 경로 진입 시 프론트엔드 빌드 산출물 메인 인덱스로 제어를 넘깁니다.
         registry.addViewController("/").setViewName("forward:/index.html");
         registry.addViewController("/memo").setViewName("forward:/memo.html");
+
+        // React Router 클라이언트 라우트 폴백: 확장자가 없는 그 외 모든 경로(/work/15, /bulk 등)를
+        // index.html로 넘겨 React Router가 처리하게 한다. 개발 서버(Vite)는 이 폴백을 기본 제공하지만,
+        // 패키징된 exe는 Spring이 정적 파일을 직접 서빙하므로 이게 없으면 새로고침이나
+        // window.location 이동 시 매핑되지 않은 경로가 그대로 404(Whitelabel Error)로 떨어진다.
+        // /api/**나 실제 정적 파일(확장자 있는 경로)은 더 우선순위 높은 핸들러가 먼저 가로채므로
+        // 이 폴백에 걸리지 않는다.
+        registry.addViewController("/{path:[^\\.]*}").setViewName("forward:/index.html");
+        registry.addViewController("/**/{path:[^\\.]*}").setViewName("forward:/index.html");
     }
 }
