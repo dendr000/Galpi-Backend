@@ -5,7 +5,7 @@
 build/
 bin/
 
-# Galpi-React의 vite build 산출물 (exe 패키징용) — static/sql/은 소스라서 별개
+# Galpi-Frontend의 vite build 산출물 (exe 패키징용) — static/sql/은 소스라서 별개
 src/main/resources/static/assets/
 src/main/resources/static/fonts/
 src/main/resources/static/index.html
