@@ -6,6 +6,9 @@
 
 ## [Unreleased]
 
+### 수정 (Fixed)
+- exe 에서 메모 화면(`/memo`)을 새로고침하거나 그 주소로 바로 들어가면 오류 화면이 뜨던 것을 고쳤다(2026-11-10 15:07). 없는 `memo.html` 로 넘기던 설정과 쓰이지 않던 `MemoViewController` 를 없애고, 다른 화면 주소처럼 `index.html` 로 넘긴다. 주소 규칙 시험 3개를 추가했다(`gradlew test`, 전체 45개 통과).
+
 ### 변경 (Changed)
 - 개발 서버 기본 포트를 8080에서 18080으로 바꿨다(2026-10-09 12:01). 8080은 Oracle XE 등과 자주 충돌한다. **호환 깨짐** 프론트 개발 서버를 쓴다면 `Galpi-Frontend/.env`의 `VITE_API_BASE_URL`을 `http://localhost:18080`으로 바꾼다.
 
